@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="register_for_this_course">register for this course</string>
+    <string name="register">register</string>
+    <string name="are_you_sure_you_want_to_register_in_this_course">Are you sure? You want to register in this course</string>
+    <string name="Register">Register</string>
+    <string name="course_name">course_name</string>
+    <string name="faculty_name">faculty_name</string>
+    <string name="department_name">department_name</string>
+    <string name="course_description">course_description</string>
+</resources>
