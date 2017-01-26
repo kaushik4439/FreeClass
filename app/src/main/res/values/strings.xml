@@ -22,4 +22,8 @@
     <string name="department_name">department_name</string>
     <string name="course_description">course_description</string>
     <string name="title_activity_faculty_course_content">FacultyCourseContent</string>
+
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

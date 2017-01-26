@@ -3,6 +3,7 @@ package com.example.lokeshkaushik.freeclass;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -41,7 +42,8 @@ public class NewCourse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_course);
-
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("New Course");
         courseName = (EditText) findViewById(R.id.courseName);
         departName = (EditText) findViewById(R.id.department);
         description = (EditText) findViewById(R.id.description);

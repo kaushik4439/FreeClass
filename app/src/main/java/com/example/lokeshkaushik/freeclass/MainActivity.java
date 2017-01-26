@@ -4,6 +4,7 @@ package com.example.lokeshkaushik.freeclass;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements LayoutAdapter.Cli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Your Courses");
         courseList = new ArrayList<Course>();
         layoutAdapter = new LayoutAdapter(this,courseList);
         layoutAdapter.setClickListener(this);
@@ -165,10 +168,9 @@ public class MainActivity extends AppCompatActivity implements LayoutAdapter.Cli
             startActivity(intent);
             finish();
         }else {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+            moveTaskToBack(true);
         }
+
 
     }
 
@@ -184,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements LayoutAdapter.Cli
 
         Intent intent = new Intent(this, FacultyCourseContent.class);
         intent.putExtra("courseId",courseKey);
+        intent.putExtra("courseName",courseList.get(position).getCourseName());
         startActivity(intent);
         finish();
 

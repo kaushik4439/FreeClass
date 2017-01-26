@@ -2,6 +2,7 @@ package com.example.lokeshkaushik.freeclass;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,6 +47,8 @@ public class AllCourses extends AppCompatActivity implements  LayoutAdapter.Clic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_courses);
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Enroll In New Course");
         allCourses = new ArrayList<Course>();
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();

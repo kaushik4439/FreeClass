@@ -2,6 +2,7 @@ package com.example.lokeshkaushik.freeclass;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,18 +20,24 @@ import java.util.ArrayList;
 public class FacultyCourseContent extends AppCompatActivity {
 
     private String courseKey;
+    private String courseName;
     private ArrayList<NewPost> postArrayList;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference mref;
     private RecyclerView recyclerView;
     private CourseContentAdapter courseContentAdapter;
     private LinearLayoutManager linearLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty_course_content);
-        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floating_upload_button);
         courseKey = getIntent().getStringExtra("courseId");
+        courseName = getIntent().getStringExtra("courseName");
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(courseName);
+        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floating_upload_button);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         mref = firebaseDatabase.getReference();
         postArrayList = new ArrayList<>();
@@ -47,6 +54,7 @@ public class FacultyCourseContent extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(FacultyCourseContent.this, CourseContent.class);
                 intent.putExtra("courseId",courseKey);
+                intent.putExtra("courseName",courseName);
                 startActivity(intent);
                 finish();
             }

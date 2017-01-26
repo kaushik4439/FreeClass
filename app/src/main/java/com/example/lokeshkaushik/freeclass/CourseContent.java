@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -50,6 +51,8 @@ public class CourseContent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_content);
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("New Post");
         chooseButton = (Button) findViewById(R.id.chooseButton);
         sendButton = (Button) findViewById(R.id.uploadButton);
         fileName = (TextView) findViewById(R.id.textView);
@@ -180,6 +183,7 @@ public class CourseContent extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(this, FacultyCourseContent.class);
         intent.putExtra("courseId",courseKey);
+        intent.putExtra("courseName",getIntent().getStringExtra("courseName"));
         startActivity(intent);
         finish();
     }

@@ -1,11 +1,13 @@
 package com.example.lokeshkaushik.freeclass;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -41,6 +43,8 @@ public class LoginActivity extends AppCompatActivity{
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference mref;
+    private ProgressDialog progressDialog;
+
     private FirebaseUser user;
     private FirebaseAuth.AuthStateListener mAuthListener;
     @Override
@@ -49,11 +53,12 @@ public class LoginActivity extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-
         mEmailView = (EditText) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
         mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mRegisterButton = (Button) findViewById(R.id.sign_up_button);
+        progressDialog = new ProgressDialog(this);
+
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -97,6 +102,9 @@ public class LoginActivity extends AppCompatActivity{
             return;
 
         }
+
+        progressDialog.setMessage("Please Wait Signing In...");
+        progressDialog.show();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -114,11 +122,13 @@ public class LoginActivity extends AppCompatActivity{
                                             if (user.isFaculty()){
                                                 Intent intent = new Intent(LoginActivity.this, TeacherHome.class);
                                                 startActivity(intent);
+                                                progressDialog.dismiss();
                                                 finish();
                                             }
                                             else{
                                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                 startActivity(intent);
+                                                progressDialog.dismiss();
                                                 finish();
                                             }
                                         }
@@ -135,6 +145,7 @@ public class LoginActivity extends AppCompatActivity{
 
 
                         if (!task.isSuccessful()) {
+                            progressDialog.dismiss();
 
                             Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         }
@@ -149,6 +160,18 @@ public class LoginActivity extends AppCompatActivity{
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
 
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        switch(keyCode)
+        {
+            case KeyEvent.KEYCODE_BACK:
+
+                moveTaskToBack(true);
+                return true;
+        }
+        return false;
     }
 
 }
