@@ -5,17 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class TeacherHome extends AppCompatActivity {
 
-    private Button btnCourse;
-    private Button btnNewCourse;
+    private ImageButton btnCourse;
+    private ImageButton btnNewCourse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_home);
-        btnCourse = (Button) findViewById(R.id.btn_courses);
-        btnNewCourse = (Button) findViewById(R.id.btn_new_course);
+        btnCourse = (ImageButton) findViewById(R.id.btn_courses);
+        btnNewCourse = (ImageButton) findViewById(R.id.btn_new_course);
 
         btnNewCourse.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -34,6 +34,7 @@ public class NewCourse extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
+    private String caller;
     private DatabaseReference mref;
 
     @Override
@@ -46,6 +47,8 @@ public class NewCourse extends AppCompatActivity {
         description = (EditText) findViewById(R.id.description);
         btnSubmit = (Button) findViewById(R.id.course_submit);
         progressDialog = new ProgressDialog(this);
+        caller = getIntent().getStringExtra("caller");
+
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         mref =firebaseDatabase.getReference();
@@ -126,7 +129,6 @@ public class NewCourse extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        String caller   = getIntent().getStringExtra("caller");
         try {
             Class callerClass = Class.forName(caller);
             if (callerClass == TeacherHome.class){
@@ -144,4 +146,5 @@ public class NewCourse extends AppCompatActivity {
         }
 
     }
+
 }

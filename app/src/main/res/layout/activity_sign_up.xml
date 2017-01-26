@@ -10,7 +10,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.lokeshkaushik.freeclass.SignUp">
 
-
+    <ScrollView
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
             android:id="@+id/user_sign_up_form"
             android:layout_width="match_parent"
@@ -81,7 +84,9 @@
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:background="#db6d0d"
+                android:textSize="30sp"
                 android:layout_marginTop="16dp"
                 android:text="register"
                 android:textStyle="bold" />
@@ -99,5 +104,7 @@
 
         </LinearLayout>
 
+    </ScrollView>
 
 </RelativeLayout>
+

@@ -11,17 +11,18 @@
     tools:context="com.example.lokeshkaushik.freeclass.TeacherHome">
 
 
-    <Button
-        android:text="courses"
+    <ImageButton
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height= "200dp"
         android:layout_marginBottom="20dp"
-        android:id="@+id/btn_courses" />
+        android:id="@+id/btn_courses"
+        android:background="@mipmap/ic_courses" />
 
-    <Button
-        android:text="take a new course"
+    <ImageButton
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_below="@+id/btn_courses"
-        android:id="@+id/btn_new_course" />
+
+        android:id="@+id/btn_new_course"
+        android:background="@mipmap/ic_new_course" />
 </RelativeLayout>

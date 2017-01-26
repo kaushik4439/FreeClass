@@ -18,7 +18,7 @@
             android:id="@+id/courseName"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="#3F51B5"
+            android:background="#009688"
             android:text="@string/course_name"
             android:gravity="center_vertical"
             android:textColor="@android:color/white"

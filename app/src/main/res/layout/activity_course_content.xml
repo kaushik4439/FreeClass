@@ -24,8 +24,8 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/title"
-                    android:hint="Title"
+                    android:id="@+id/subject"
+                    android:hint="Subject"
                     android:layout_margin="10dp"
                     android:inputType="textVisiblePassword|textNoSuggestions"
                     android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/content_decreption"
+                    android:id="@+id/message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Message"
@@ -52,6 +52,17 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/chooseButton"
                 android:text="Choose File"
+                android:background="#db6d0d"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textColor="#000"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/uploadButton"
+                android:background="#db6d0d"
+                android:text="Post Message"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:textSize="20sp"

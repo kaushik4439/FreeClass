@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -111,7 +112,8 @@ public class SignUp extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //checking if success
                         if (task.isSuccessful()){
-
+                            UserProfileChangeRequest.Builder builder = new UserProfileChangeRequest.Builder();
+                            builder.setDisplayName(userName);
                             firebaseUser = mAuth.getCurrentUser();
                             saveUserInformation(userName,email,isSwitchOn);
                             progressDialog.dismiss();

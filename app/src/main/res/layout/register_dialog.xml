@@ -38,7 +38,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
         android:textSize="20sp"
-        android:background="#FF1493"
+        android:background="#db6d0d"
         android:gravity="center"/>
 
 </LinearLayout>

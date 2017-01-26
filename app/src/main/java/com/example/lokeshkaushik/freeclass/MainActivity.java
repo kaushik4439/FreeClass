@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements LayoutAdapter.Cli
         recyclerView.setAdapter(layoutAdapter);
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-
         mref = firebaseDatabase.getReference();
         user = mAuth.getCurrentUser();
         getRegisteredCourseList();
@@ -83,11 +82,12 @@ public class MainActivity extends AppCompatActivity implements LayoutAdapter.Cli
                     Intent intent = new Intent(MainActivity.this, NewCourse.class);
                     intent.putExtra("caller", "MainActivity");
                     startActivity(intent);
-
+                    finish();
                 }
                 else{
                     Intent intent = new Intent(MainActivity.this, AllCourses.class);
                     startActivity(intent);
+                    finish();
                 }
 
             }
@@ -180,11 +180,13 @@ public class MainActivity extends AppCompatActivity implements LayoutAdapter.Cli
 
     @Override
     public void itemClicked(View view, int position) {
-        if (isFaculty){
-            Intent intent = new Intent(this, FacultyCourseContent.class);
-            startActivity(intent);
-            finish();
-        }
+        String courseKey = courseList.get(position).getCourseKey();
+
+        Intent intent = new Intent(this, FacultyCourseContent.class);
+        intent.putExtra("courseId",courseKey);
+        startActivity(intent);
+        finish();
+
 
     }
 }

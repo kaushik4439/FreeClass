@@ -65,14 +65,7 @@ public class AllCourses extends AppCompatActivity implements  LayoutAdapter.Clic
         //registeredCourses.clear();
         allCourses.clear();
         getAllCourses();
-       // getRegisteredCourseList();
-
-        //allCourses.removeAll(registeredCourses);
-
-        //layoutAdapter.notifyDataSetChanged();
-
-
-
+       // layoutAdapter.notifyDataSetChanged();
 
 
     }
@@ -118,71 +111,7 @@ public class AllCourses extends AppCompatActivity implements  LayoutAdapter.Clic
 
     }
 
-    public void getRegisteredCourseList(){
 
-        mref.child("students").orderByChild(user.getUid()).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                if (dataSnapshot.getValue()!=null){
-                    String courseKey = dataSnapshot.getKey();
-                    mref.child("courses").orderByKey().equalTo(courseKey).addChildEventListener(new ChildEventListener() {
-                        @Override
-                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                            Course course = dataSnapshot.getValue(Course.class);
-                            registeredCourses.add(course);
-                            //layoutAdapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                        }
-
-                        @Override
-                        public void onChildRemoved(DataSnapshot dataSnapshot) {
-                            Course course = dataSnapshot.getValue(Course.class);
-                            registeredCourses.remove(course);
-                            //layoutAdapter.notifyDataSetChanged();
-
-                        }
-
-                        @Override
-                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }
     public void registerInNewCourse(final int position) {
 
 
