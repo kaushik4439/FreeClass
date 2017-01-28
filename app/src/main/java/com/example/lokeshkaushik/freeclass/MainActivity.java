@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements LayoutAdapter.Cli
         setContentView(R.layout.activity_main);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Your Courses");
+        actionBar.setDisplayHomeAsUpEnabled(true);
         courseList = new ArrayList<Course>();
         layoutAdapter = new LayoutAdapter(this,courseList);
         layoutAdapter.setClickListener(this);
@@ -83,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements LayoutAdapter.Cli
             public void onClick(View view) {
                 if (isFaculty){
                     Intent intent = new Intent(MainActivity.this, NewCourse.class);
-                    intent.putExtra("caller", "MainActivity");
+                    intent.putExtra("caller", MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -160,6 +164,12 @@ public class MainActivity extends AppCompatActivity implements LayoutAdapter.Cli
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_user_profile, menu);
+        return true;
+    }
 
     @Override
     public void onBackPressed() {
@@ -180,6 +190,25 @@ public class MainActivity extends AppCompatActivity implements LayoutAdapter.Cli
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+        {
+            if (isFaculty){
+                Intent intent = new Intent(this, TeacherHome.class);
+                startActivity(intent);
+                finish();
+            }else {
+                moveTaskToBack(true);
+            }
+        }
+        if (item.getItemId()== R.id.action_profile){
+            Intent intent = new Intent(this, UserProfile.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public void itemClicked(View view, int position) {
         String courseKey = courseList.get(position).getCourseKey();

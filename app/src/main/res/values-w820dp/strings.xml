@@ -8,4 +8,5 @@
     <string name="faculty_name">faculty_name</string>
     <string name="department_name">department_name</string>
     <string name="course_description">course_description</string>
+    <string name="profile">Profile</string>
 </resources>

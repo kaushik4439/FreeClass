@@ -7,6 +7,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,7 +38,7 @@ public class NewCourse extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
-    private String caller;
+    private Class caller;
     private DatabaseReference mref;
 
     @Override
@@ -44,25 +47,18 @@ public class NewCourse extends AppCompatActivity {
         setContentView(R.layout.activity_new_course);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("New Course");
+        actionBar.setDisplayHomeAsUpEnabled(true);
         courseName = (EditText) findViewById(R.id.courseName);
         departName = (EditText) findViewById(R.id.department);
         description = (EditText) findViewById(R.id.description);
         btnSubmit = (Button) findViewById(R.id.course_submit);
         progressDialog = new ProgressDialog(this);
-        caller = getIntent().getStringExtra("caller");
-
+        caller = getIntent().getClass();
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         mref =firebaseDatabase.getReference();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                user = firebaseAuth.getCurrentUser();
 
-            }
-        };
-
-
+        user = mAuth.getCurrentUser();
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,18 +118,24 @@ public class NewCourse extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_user_profile, menu);
+        return true;
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+
 
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        try {
-            Class callerClass = Class.forName(caller);
-            if (callerClass == TeacherHome.class){
+
+            if (caller == TeacherHome.class){
                 Intent intent = new Intent(this, TeacherHome.class);
                 startActivity(intent);
                 finish();
@@ -143,10 +145,32 @@ public class NewCourse extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            if (caller == TeacherHome.class) {
+                Intent intent = new Intent(this, TeacherHome.class);
+                startActivity(intent);
+                finish();
+            }
+            else {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+        if (item.getItemId()==R.id.action_profile){
+            Intent intent = new Intent(this, UserProfile.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
 
 }

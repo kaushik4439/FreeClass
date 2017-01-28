@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,6 +52,7 @@ public class AllCourses extends AppCompatActivity implements  LayoutAdapter.Clic
         setContentView(R.layout.activity_all_courses);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Enroll In New Course");
+        actionBar.setDisplayHomeAsUpEnabled(true);
         allCourses = new ArrayList<Course>();
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -155,5 +159,26 @@ public class AllCourses extends AppCompatActivity implements  LayoutAdapter.Clic
             }
         });
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_user_profile, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) // Press Back Icon
+        {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if (item.getItemId()==R.id.action_profile){
+            Intent intent = new Intent(this, UserProfile.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

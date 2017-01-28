@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.database.ChildEventListener;
@@ -36,6 +39,7 @@ public class FacultyCourseContent extends AppCompatActivity {
         courseName = getIntent().getStringExtra("courseName");
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(courseName);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.floating_upload_button);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -98,5 +102,26 @@ public class FacultyCourseContent extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_user_profile, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+        {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        if (item.getItemId()==R.id.action_profile){
+            Intent intent = new Intent(this, UserProfile.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

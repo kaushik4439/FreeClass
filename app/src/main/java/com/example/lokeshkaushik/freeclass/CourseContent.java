@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,6 +56,7 @@ public class CourseContent extends AppCompatActivity {
         setContentView(R.layout.activity_course_content);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("New Post");
+        actionBar.setDisplayHomeAsUpEnabled(true);
         chooseButton = (Button) findViewById(R.id.chooseButton);
         sendButton = (Button) findViewById(R.id.uploadButton);
         fileName = (TextView) findViewById(R.id.textView);
@@ -186,6 +190,31 @@ public class CourseContent extends AppCompatActivity {
         intent.putExtra("courseName",getIntent().getStringExtra("courseName"));
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_user_profile, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+        {
+            Intent intent = new Intent(this, FacultyCourseContent.class);
+            intent.putExtra("courseId",courseKey);
+            intent.putExtra("courseName",getIntent().getStringExtra("courseName"));
+            startActivity(intent);
+            finish();
+        }
+        if (item.getItemId()== R.id.action_profile){
+            Intent intent = new Intent(this, UserProfile.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }
